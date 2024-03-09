@@ -36,11 +36,19 @@ int main(void)
 	root.x = 15;
 	root.next = malloc(sizeof(Node));
 	root.next->x = -2;
-	root.next->next = NULL;
+	root.next->next = malloc(sizeof(Node));
+	root.next->next->x = 21;
+	root.next->next->next = NULL;
 
-	printf("First: %d\n", root.x);
-	printf("Second: %d\n", root.next->x);
+	Node* curr = &root;
+	while(curr != NULL)
+	{
+		printf("%d\n", curr->x);
 
+		curr = curr->next;
+	}
+
+	free(root.next->next);
 	free(root.next);
 	return 0;
 }
