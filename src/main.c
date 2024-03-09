@@ -40,14 +40,11 @@ int main(void)
 	root.next->next->x = 21;
 	root.next->next->next = NULL;
 
-	Node* curr = &root;
-	while(curr != NULL)
+
+	for(Node* curr = &root; curr != NULL; curr = curr->next)
 	{
 		printf("%d\n", curr->x);
-
-		curr = curr->next;
 	}
-
 	free(root.next->next);
 	free(root.next);
 	return 0;
