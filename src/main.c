@@ -29,15 +29,17 @@ typedef struct Node
 
 }Node;
 
+Node* head = NULL;
 
 void insert_end(Node** root, int value)
 {
 	Node* new_node = malloc(sizeof(Node));
+
 	if(new_node == NULL)
 	{
-		printf("Memory allocated failed!\n");
 		exit(1);
 	}
+
 	new_node->next = NULL;
 	new_node->x = value;
 
@@ -48,12 +50,25 @@ void insert_end(Node** root, int value)
 		return;
 	}
 
-		Node* curr = *root;
-		while(curr->next != NULL)
-		{
-			curr = curr->next;
-		}
-		curr->next = new_node;
+	Node* curr = *root;
+	while(curr->next != NULL)
+	{
+		curr = curr->next;
+	}
+
+	curr->next = new_node;
+}
+
+void deallocate(Node** root)
+{
+	Node* curr = *root;
+	while(curr != NULL)
+	{
+		Node* aux = curr;
+		curr = curr->next;
+		free(aux);
+	}
+	*root = NULL;
 }
 
 int main(void)
@@ -72,6 +87,16 @@ int main(void)
 		curr = curr->next;
 	}
 
+	deallocate(&root);
 
 	return 0;
 }
+
+
+
+
+
+
+
+
+
