@@ -59,6 +59,21 @@ void insert_end(Node** root, int value)
 	curr->next = new_node;
 }
 
+void insert_after(Node* node, int value)
+{
+	Node* new_node = malloc(sizeof(Node));
+
+	if(new_node == NULL)
+	{
+		exit(1);
+	}
+
+	new_node->x = value;
+	new_node->next = node->next;
+	node->next = new_node;
+
+}
+
 void deallocate(Node** root)
 {
 	Node* curr = *root;
@@ -78,6 +93,8 @@ int main(void)
 	insert_end(&root, -2);
 	insert_end(&root, 10);
 	insert_end(&root, -25);
+
+	insert_after(root, 455);
 
 	Node* curr = root;
 	while(curr != NULL)
